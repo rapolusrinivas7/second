@@ -1,0 +1,28 @@
+<app-navbar [participentname]="name"></app-navbar>
+<div class="row">
+
+    <div class="col s12 card">
+        <div *ngIf="currentQuiz < 5">
+            <p class="center">{{currentQuiz + 1}} of {{quizzers.length}}</p>
+            <h2>{{quizzers[rendamise].quetion}}</h2>
+
+            <ul class="collection card-content" *ngFor="let quiz of quizzers[rendamise].answer" appBackground
+                [correctanswer]="quiz.correct">
+                <li class="collection-list">
+                    <label>
+                        <input class="with-gap" name="option" type="radio" (change)="onanswer(quiz.correct)"
+                            [disabled]="answerselected" />
+                        <span> {{quiz.option}}</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <div *ngIf="currentQuiz > 4">
+            <button class="btn btn-success btn-block" (click)="showresult()">show Result</button>
+            <div *ngIf="result">
+                <h4>correct answers: {{correctanswer}} | incorrect answers: {{incorrectanswer}}</h4>
+                <button class="btn btn-success btn-block" (click)="retry()">Retry</button>
+            </div>
+        </div>
+    </div>
+</div>
